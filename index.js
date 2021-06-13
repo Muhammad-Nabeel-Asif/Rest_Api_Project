@@ -35,6 +35,21 @@ app.get('/comments', (req,res) => {
     res.render('comments/index', {comments});
 })
 
+
+// creating route for adding new comments :
+// {
+app.get('/comments/new', (req,res) => {
+    res.render('comments/new');
+})
+// sending post request to retrieve data from form and do opr on it and use it :
+app.post('/comments', (req,res) => {
+    const {username, comment} = req.body;
+    comments.push({username,comment});
+    res.send('it worked !');
+})
+// }
+
+
 app.get("*", (req,res) => {
     res.send('sorry nothing found :)')
 })
