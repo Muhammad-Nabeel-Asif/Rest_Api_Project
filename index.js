@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const { v4: uuid } = require('uuid');
 
 // parsing body with urlencoded method && json file as well
 app.use(express.urlencoded({ extended: true }));
@@ -12,22 +13,22 @@ app.set('view engine', 'ejs')
 
 const comments = [
     {
-        id:1,
+        id:uuid(),
         username: 'Nabeel',
         comment: 'Heheheehehhehe , here is my comment !'
     },
     {
-        id:2,
+        id:uuid(),
         username: 'Asif',
         comment: 'Heheheehehhehe , here is my comment !'
     },
     {
-        id:3,
+        id:uuid(),
         username: 'Adeel',
         comment: 'Heheheehehhehe , here is my comment !'
     },
     {
-        id:4,
+        id:uuid(),
         username: 'Hadi',
         comment: 'Heheheehehhehe , here is my comment !'
     }
@@ -48,14 +49,14 @@ app.get('/comments/new', (req,res) => {
 // sending post request to retrieve data from form and do opr on it and use it :
 app.post('/comments', (req,res) => {
     const {username, comment} = req.body;
-    comments.push({username,comment});
+    comments.push({ username, comment, id: uuid() });
     res.redirect('/comments')
 })
 // }
 
 app.get('/comments/:id', (req,res) => {
     const { id } = req.params;
-    let comment = comments.find(c => c.id === parseInt(id));
+    let comment = comments.find(c => c.id === id);
     res.render('comments/show', { comment });
 })  
 
