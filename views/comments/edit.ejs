@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EDIT</title>
+  </head>
+  <body>
+    <h1>Edit</h1>
+
+    <!-- Here we are using a form to edit comment using patch request that is done via method-override node package to send PATCH request by a form , so we set request to : " ?_method=PATCH "-->
+
+    <form method="post" action="/comments/<%= comment.id %>?_method=PATCH">
+      <textarea name="comment" id="" cols="30" rows="10">
+            <%= comment.comment %> 
+        </textarea
+      >
+      <button>submit</button>
+    </form>
+  </body>
+</html>
