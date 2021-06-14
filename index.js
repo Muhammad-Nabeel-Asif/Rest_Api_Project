@@ -13,7 +13,7 @@ app.use(methodOverride("_method"));
 app.set("/views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-const comments = [
+let comments = [
   {
     id: uuid(),
     username: "Nabeel",
@@ -71,11 +71,18 @@ app.patch("/comments/:id", (req, res) => {
   res.redirect("/comments");
 });
 
-// update using form :
+// update comments using form and method override http in it  :
 app.get("/comments/:id/edit", (req, res) => {
   const { id } = req.params;
   const comment = comments.find((c) => c.id === id);
   res.render("comments/edit", { comment });
+});
+
+// delete the comment using the corresponding id given in req.params
+app.delete("/comments/:id", (req, res) => {
+  const { id } = req.params;
+  comments.filter((c) => c.id !== id);
+  res.redirect("/comments");
 });
 
 app.get("*", (req, res) => {
